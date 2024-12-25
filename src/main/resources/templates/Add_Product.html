@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Product Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            max-width: 100%;
+        }
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .form-container button {
+            width: 30%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form-container button[type="reset"] {
+            background-color: #f44336;
+        }
+        .form-container button[type="button"] {
+            background-color: #008CBA;
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+        .form-container button[type="reset"]:hover {
+            background-color: #e53935;
+        }
+        .form-container button[type="button"]:hover {
+            background-color: #007bb5;
+        }
+        .form-container .button-group {
+            display: flex;
+            justify-content: space-between;
+        }
+         .form-container input.error {
+            border-color: red;
+        }
+        .form-container .error-message {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Product Form</h1>
+        <form th:action="@{saveProduct}" th:object="${productModel}" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name"  >
+            <div class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+            
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price"  >
+            <div class="error-message" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+            
+            <label for="brand">Brand:</label>
+            <input type="text" id="brand" name="brand" th:value="*{brand}" >
+             <div class="error-message" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"></div>
+            
+            <label for="madeIn">Made In:</label>
+            <input type="text" id="madeIn" name="madeIn" th:value="*{madeIn}" >
+            <div class="error-message" th:if="${#fields.hasErrors('madeIn')}" th:errors="*{madeIn}"></div>
+            
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity"  th:value="*{quantity}" >
+                <div class="error-message" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></div>
+            
+            <label for="discountrate">Discount:</label>
+            <input type="number" id="discountrate" name="discountrate" th:value="*{discountrate}" >
+             <div class="error-message" th:if="${#fields.hasErrors('discountrate')}" th:errors="*{discountrate}"></div>
+            
+            <div class="button-group">
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+                     
+            </div>    
+        </form>     
+    </div>
+    
+</body>
+</html>
